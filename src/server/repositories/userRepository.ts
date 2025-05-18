@@ -10,6 +10,12 @@ export class UserRepository {
     });
   }
 
+  async findUserById(id: string) {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
+  }
+
   async createUser(name: string, email: string, password: string): Promise<User> {
     return this.prisma.user.create({
       data: {

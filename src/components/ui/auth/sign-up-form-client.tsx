@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/server/actions/auth"; //  あとで実装するサインアップアクション
+import { credentialSignUp } from "@/server/actions/auth"; //  あとで実装するサインアップアクション
 
 export function SignUpFormClient() {
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ export function SignUpFormClient() {
     // TODO: バリデーション処理を追加
 
     try {
-      const result = await signUp({ email, password, name }); //  あとで実装するサインアップアクション
+      const result = await credentialSignUp({ email, password, name }); //  あとで実装するサインアップアクション
       if (result.error) {
         setError(result.error);
       } else {

@@ -6,6 +6,7 @@ import { prisma } from "../prisma/prismaClient";
 import { UserService } from "@/server/services/userService";
 import { comparePassword } from "@/utils/password";
 import { User } from "../../../generated/prisma";
+import { googleSignIn } from "@/server/actions/auth";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -47,4 +48,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async signIn({ account, profile }) {
+      return googleSignIn({ account, profile });
+    },
+    // 他のコールバック (jwt, sessionなど) が必要であればここに追加
+  },
 });
